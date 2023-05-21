@@ -1,15 +1,36 @@
+import { useSelector, useDispatch } from "react-redux";
+import { getPosts } from "../../redux/slices/postsSlice";
+import { useEffect } from "react";
+import { setPosts } from "../../redux/slices/postsSlice";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts?_page=10&_limit=10")
+      .then((response) => response.json())
+      .then((json) => dispatch(setPosts(json)));
+  }, []);
+  const selectItems = useSelector(getPosts);
+
+  console.log(selectItems);
+
   return (
-    <Navbar bg="dark" expand="lg">
+    <main>
       <Container>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro, atque ipsum neque odio optio omnis fugit fuga quia labore laborum perspiciatis in debitis reiciendis blanditiis ratione dignissimos recusandae iure nesciunt.
+        <Row>
+          {selectItems.map(({id,title,body}) => (
+            <Col key={id} xl={3} lg={4} md={6}>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </Col>
+          ))}
+        </Row>
       </Container>
-    </Navbar>
+    </main>
   );
 };
 
