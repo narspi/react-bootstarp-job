@@ -9,7 +9,6 @@ const Header = () => {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Nav className="me-auto">
-          
             <LinkContainer to="/">
               <Nav.Link>Главная</Nav.Link>
             </LinkContainer>
