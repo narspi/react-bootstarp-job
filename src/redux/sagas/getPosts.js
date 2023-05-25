@@ -1,17 +1,14 @@
 import { put, call, takeEvery } from 'redux-saga/effects';
-import { setPosts } from '../slices/postsSlice';
-
-const fooFetch =() => {
-    
-}
+import { setPosts,requestSetPostConst } from '../slices/postsSlice';
+import { requestFoo } from './../../api/requestFoo';
 
 export function* getPostsWorker() {
-    const data = yield fetch("https://jsonplaceholder.typicode.com/posts?_page=1&_limit=12").then(res=>res.json()); 
+    const data = yield call(requestFoo); 
     yield put(setPosts(data));
 }
 
 function* getPostsWatcher() {
-    yield takeEvery('posts/setPosts',getPostsWorker)
+    yield takeEvery(requestSetPostConst,getPostsWorker)
 }
 
 export default getPostsWatcher;

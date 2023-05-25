@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getPostsSelector } from "../../redux/slices/postsSlice";
 import { useEffect } from "react";
-import { setPosts } from "../../redux/slices/postsSlice";
+import { setPosts,requestSetPost } from "../../redux/slices/postsSlice";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Post from "../../components/post/post";
+import Post from "../../components/post/Post";
 import { delay as delayFoo } from "../../utils/delay";
 import PostPreloader from "../../components/post/preloader";
 import {default as PaginationBlock} from "../../components/pagination";
@@ -15,8 +15,8 @@ const Home = () => {
 
   useEffect(() => {
     delayFoo();
-    //dispatch(setPosts())
-  }, [dispatch]);
+    dispatch(requestSetPost())
+  }, []);
   
   const selectItems = useSelector(getPostsSelector);
   console.log(selectItems);
@@ -38,36 +38,6 @@ const Home = () => {
           ) : (
             <PostPreloader length={12} />
           )} */}
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
-          <div>
-            bla bla for fix casing ignore
-          </div>
         </Row>
         <Row className="mt-4">
           <Col>
