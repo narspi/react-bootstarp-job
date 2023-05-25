@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getPostsSelector } from "../../redux/slices/postsSlice";
 import { useEffect } from "react";
-import { setPosts,requestSetPost } from "../../redux/slices/postsSlice";
+import { requestSetPost } from "../../redux/slices/postsSlice";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Post from "../../components/post/Post";
 import { delay as delayFoo } from "../../utils/delay";
-import PostPreloader from "../../components/post/preloader";
+import PostPreloader from "../../components/post/Preloader";
 import {default as PaginationBlock} from "../../components/pagination";
 
 const Home = () => {
