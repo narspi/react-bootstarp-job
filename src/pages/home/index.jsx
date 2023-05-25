@@ -18,8 +18,8 @@ const Home = () => {
     //dispatch(setPosts())
   }, [dispatch]);
   
-  // const selectItems = useSelector(getPostsSelector);
-  // console.log(selectItems);
+  const selectItems = useSelector(getPostsSelector);
+  console.log(selectItems);
 
   return (
     <main>
@@ -38,6 +38,36 @@ const Home = () => {
           ) : (
             <PostPreloader length={12} />
           )} */}
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
+          <div>
+            bla bla for fix casing ignore
+          </div>
         </Row>
         <Row className="mt-4">
           <Col>
