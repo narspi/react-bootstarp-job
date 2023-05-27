@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPostsSelector,getPageSelector,isLoadingSelector,requestSetPost } from "../../redux/slices/postsSlice";
+import {
+  getPostsSelector,
+  getPageSelector,
+  isLoadingSelector,
+  requestSetPost,
+  requestSetPostByTitle,
+} from "../../redux/slices/postsSlice";
+import debounce from "lodash.debounce";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -8,6 +15,8 @@ import Col from "react-bootstrap/Col";
 import Post from "../../components/post/Post";
 import PostPreloader from "../../components/post/Preloader";
 import PaginationBlock from "../../components/pagination";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from "react-bootstrap/Form";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,9 +25,30 @@ const Home = () => {
   const isLoading = useSelector(isLoadingSelector);
 
   useEffect(() => {
-    dispatch(requestSetPost({page: page,limit: 12}))
+    dispatch(requestSetPost({ page: page, limit: 12 }));
   }, [page]);
-  
+
+  const foo = () => {
+    console.log("debounce");
+  };
+
+  const handlerSearchChange = (event) => {
+    console.log(event.target.value);
+  };
+
+  // useEffect(() => {
+  //   fetch("http://jsonplaceholder.typicode.com/posts", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       title: "en",
+  //     }),
+  //     headers: {
+  //       "Content-type": "application/json; charset=UTF-8",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((json) => console.log(json));
+  // }, []);
 
   return (
     <main>
@@ -26,6 +56,16 @@ const Home = () => {
         <Row>
           <Col>
             <h1>Страница постов</h1>
+            <InputGroup
+              className="mb-3"
+              onChange={debounce(handlerSearchChange, 300)}
+            >
+              <Form.Control
+                placeholder="Поиск по заголовку"
+                aria-label="Поиск по заголовку"
+                aria-describedby="basic-addon2"
+              />
+            </InputGroup>
           </Col>
         </Row>
         <Row className="g-4">
@@ -39,7 +79,7 @@ const Home = () => {
         </Row>
         <Row className="mt-4">
           <Col>
-            <PaginationBlock/>
+            <PaginationBlock />
           </Col>
         </Row>
       </Container>

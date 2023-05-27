@@ -9,7 +9,7 @@ export const store = configureStore({
   reducer : {
     posts: postsSliceReducer
   },
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: true,
   middleware: [
     sagaMiddleware
   ]

@@ -17,6 +17,10 @@ const postsSlice = createSlice({
     setPage: (state,action) => {
       state.page = action.payload;
       state.isLoading = false;
+    },
+    errorRequest: (state) => {
+      state.items = [],
+      state.isLoading = false
     }
   },
 });
@@ -27,7 +31,12 @@ export const isLoadingSelector = (state) => state.posts.isLoading;
 
 
 export const requestSetPostConst = 'posts/requestSetPost';
-export const { setPosts,setPage } = postsSlice.actions;
 export const requestSetPost = createAction(requestSetPostConst);
+
+export const requestSetPostByTitleConst = 'posts/requestSetPostByTitle';
+export const requestSetPostByTitle = createAction(requestSetPostConst);
+
+
+export const { setPosts,setPage,errorRequest } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -2,11 +2,16 @@ import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import { LinkContainer } from "react-router-bootstrap";
-import Alert from "react-bootstrap/Alert";
-import Button from 'react-bootstrap/Button';
+import Accordion from "react-bootstrap/Accordion";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const Post = ({ id, title, body, userId }) => {
   const [show, setShow] = useState(false);
+
+  const handleCommentsShow = () => {
+    setShow(!show);
+  };
+
   return (
     <Col xl={3} lg={4} md={6}>
       <Card className="h-100">
@@ -18,17 +23,56 @@ const Post = ({ id, title, body, userId }) => {
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Text>{body}</Card.Text>
-          <Alert show={show} variant="success">
-            <div>
-              тут будут комментарии
-            </div>
-            <div className="d-flex justify-content-end">
-              <Button onClick={() => setShow(false)} variant="outline-success">
-                Close me
-              </Button>
-            </div>
-          </Alert>
-          {!show && <Button onClick={() => setShow(true)}>Комментарии</Button>}
+
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Коментарии</Accordion.Header>
+              <Accordion.Body>
+                <ListGroup>
+                  <ListGroup.Item>
+                    <span>Eliseo@gardner.biz</span>
+                    <div>
+                      laudantium enim quasi est quidem magnam voluptate ipsam
+                      eos\ntempora quo necessitatibus\ndolor quam autem
+                      quasi\nreiciendis et nam sapiente accusantium
+                    </div>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <span>Eliseo@gardner.biz</span>
+                    <div>
+                      laudantium enim quasi est quidem magnam voluptate ipsam
+                      eos\ntempora quo necessitatibus\ndolor quam autem
+                      quasi\nreiciendis et nam sapiente accusantium
+                    </div>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <span>Eliseo@gardner.biz</span>
+                    <div>
+                      laudantium enim quasi est quidem magnam voluptate ipsam
+                      eos\ntempora quo necessitatibus\ndolor quam autem
+                      quasi\nreiciendis et nam sapiente accusantium
+                    </div>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <span>Eliseo@gardner.biz</span>
+                    <div>
+                      laudantium enim quasi est quidem magnam voluptate ipsam
+                      eos\ntempora quo necessitatibus\ndolor quam autem
+                      quasi\nreiciendis et nam sapiente accusantium
+                    </div>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <span>Eliseo@gardner.biz</span>
+                    <div>
+                      laudantium enim quasi est quidem magnam voluptate ipsam
+                      eos\ntempora quo necessitatibus\ndolor quam autem
+                      quasi\nreiciendis et nam sapiente accusantium
+                    </div>
+                  </ListGroup.Item>
+                </ListGroup>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </Card.Body>
         <Card.Footer>
           <LinkContainer to={`user/${userId}`}>
