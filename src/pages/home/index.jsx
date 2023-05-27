@@ -25,7 +25,7 @@ const Home = () => {
   const isLoading = useSelector(isLoadingSelector);
 
   useEffect(() => {
-    dispatch(requestSetPost({ page: page, limit: 12 }));
+    if (!isLoading) dispatch(requestSetPost({ page: page, limit: 12 }));
   }, [page]);
 
   const foo = () => {

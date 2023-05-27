@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import postsSliceReducer from "./slices/postsSlice";
+import userSliceReducer from "./slices/userSlice";
 import createSagaMiddleware from 'redux-saga';
-import getPostsWatcher from "./sagas/getPosts";
+import rootSagas from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer : {
-    posts: postsSliceReducer
+    posts: postsSliceReducer,
+    user: userSliceReducer
   },
   devTools: true,
   middleware: [
@@ -15,4 +17,4 @@ export const store = configureStore({
   ]
 });
 
-sagaMiddleware.run(getPostsWatcher);
+sagaMiddleware.run(rootSagas);

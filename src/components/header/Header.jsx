@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { RxHamburgerMenu } from 'react-icons/rx';
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -24,18 +24,27 @@ const Header = () => {
               <Nav.Link>Обо мне</Nav.Link>
             </LinkContainer>
           </Nav>
-          <div className="d-flex align-items-center">
-            <a href="tel:+798712628292">+798712628292</a>
-            <Button variant="outline-primary" onClick={handleShow} className="ms-2">
-              <RxHamburgerMenu style={{width: '20px'}}/>
-            </Button>
-          </div>
+          <Button
+            variant="outline-primary"
+            onClick={handleShow}
+            className="ms-2 lh-1"
+          >
+            <RxHamburgerMenu className="lh-1"/>
+          </Button>
           <Modal show={show} onHide={handleClose} animation={false}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
             <Modal.Body>
-              Woohoo, you are reading this text in a modal!
+              <div className="d-flex">
+                  <img className="img-fluid w-50" src="./alexander.jpg" alt="alexander"/>
+                  <div className="ms-3">
+                    <div>Александр Иванов</div>
+                    <div>
+                      <a href="tel:_79871268292">89871268292</a>
+                    </div>
+                    <div>
+                      <a href="malito:ivanovmichurina@gmail.com">ivanovmichurina@gmail.com</a>
+                    </div>
+                  </div>
+              </div>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>

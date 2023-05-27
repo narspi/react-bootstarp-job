@@ -12,13 +12,15 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/user/:id" element={<UserPage />} />
-        </Routes>
-        <Footer />
+        <div className="d-flex flex-column min-vh-100">
+          <Header />
+          <Routes>
+            <Route index path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/user/:id" element={<UserPage />} />
+          </Routes>
+          <Footer />
+        </div>
       </BrowserRouter>
     </Provider>
   );

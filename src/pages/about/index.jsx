@@ -21,6 +21,8 @@ const About = () => {
               опыта работы в веб студии и фронт разработки. Есть опыт работы на
               фрилансе в вёрстке. Wordpres как пассивный заработок.
             </p>
+            <div><a href="tel:89871268292">89871268292</a></div>
+            <div><a href="malito:ivanovmichurina@gmail.com">ivanovmichurina@gmail.com</a></div>
           </Col>
           <Col md={12}>
             <h2 className="mt-4">Мои кейсы комерческие</h2>
@@ -29,9 +31,6 @@ const About = () => {
               <img src="./mobuiz.jpg" alt="mobuiz" className="img-fluid mb-4" />
               <a href="https://www.mobius-sklad.ru/">Сылка на сайт</a>
             </div>
-          </Col>
-          <Col md={12}>
-            <h2 className="mt-4">Мои кейсы комерческие</h2>
             <div className="mt-2">
               <h3>Адвокат Шошмарин</h3>
               <img src="./quiz.jpg" alt="mobuiz" className="img-fluid mb-4" />
