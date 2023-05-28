@@ -71,7 +71,7 @@ const Home = () => {
         <Row className="g-4">
           {isLoading ? (
             selectItems.map(({ id, title, body, userId }) => (
-              <Post key={id} title={title} body={body} userId={userId} />
+              <Post key={id} id={id} title={title} body={body} userId={userId} />
             ))
           ) : (
             <PostPreloader length={12} />

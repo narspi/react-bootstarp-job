@@ -29,22 +29,36 @@ const Header = () => {
             onClick={handleShow}
             className="ms-2 lh-1"
           >
-            <RxHamburgerMenu className="lh-1"/>
+            <RxHamburgerMenu className="lh-1" />
           </Button>
           <Modal show={show} onHide={handleClose} animation={false}>
             <Modal.Body>
               <div className="d-flex">
-                  <img className="img-fluid w-50" src="./alexander.jpg" alt="alexander"/>
-                  <div className="ms-3">
-                    <div>Александр Иванов</div>
-                    <div>
-                      <a href="tel:_79871268292">89871268292</a>
-                    </div>
-                    <div>
-                      <a href="malito:ivanovmichurina@gmail.com">ivanovmichurina@gmail.com</a>
-                    </div>
+                <img
+                  className="img-fluid w-50"
+                  src="./alexander.jpg"
+                  alt="alexander"
+                />
+                <div className="ms-3">
+                  <div>Александр Иванов</div>
+                  <div>
+                    <a href="tel:_79871268292">89871268292</a>
                   </div>
+                  <div>
+                    <a href="malito:ivanovmichurina@gmail.com">
+                      ivanovmichurina@gmail.com
+                    </a>
+                  </div>
+                </div>
               </div>
+              <Nav variant="pills" className="mt-4 text-center">
+                <LinkContainer to="/">
+                  <Nav.Link onClick={handleClose}>Главная</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/about">
+                  <Nav.Link onClick={handleClose}>Обо мне</Nav.Link>
+                </LinkContainer>
+              </Nav>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>

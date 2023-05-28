@@ -4,17 +4,28 @@ import Card from "react-bootstrap/Card";
 import { LinkContainer } from "react-router-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import ListGroup from "react-bootstrap/ListGroup";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  isLoadingPostCommentsSelector,
+  requestSetComments,
+  getPostCommentsSelector,
+} from "../../redux/slices/postsSlice";
 
 const Post = ({ id, title, body, userId }) => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const isLoadingPostComments = useSelector(isLoadingPostCommentsSelector(id));
 
-  const handleCommentsShow = () => {
-    setShow(!show);
+  const handleAccordionClick = () => {
+    setOpen(!open);
+    if (!isLoadingPostComments) dispatch(requestSetComments(id));
   };
 
+  const comments = useSelector(getPostCommentsSelector(id));
+
   return (
-    <Col xl={3} lg={4} md={6}>
-      <Card className="h-100">
+    <Col lg={4} md={6}>
+      <Card>
         <LinkContainer to={`user/${userId}`}>
           <Card.Link>
             <Card.Img variant="top" src="./placeholder.jpg" />
@@ -23,53 +34,30 @@ const Post = ({ id, title, body, userId }) => {
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Text>{body}</Card.Text>
-
           <Accordion>
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Коментарии</Accordion.Header>
+              <Accordion.Header onClick={handleAccordionClick}>
+                Коментарии
+              </Accordion.Header>
               <Accordion.Body>
-                <ListGroup>
-                  <ListGroup.Item>
-                    <span>Eliseo@gardner.biz</span>
-                    <div>
-                      laudantium enim quasi est quidem magnam voluptate ipsam
-                      eos\ntempora quo necessitatibus\ndolor quam autem
-                      quasi\nreiciendis et nam sapiente accusantium
-                    </div>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <span>Eliseo@gardner.biz</span>
-                    <div>
-                      laudantium enim quasi est quidem magnam voluptate ipsam
-                      eos\ntempora quo necessitatibus\ndolor quam autem
-                      quasi\nreiciendis et nam sapiente accusantium
-                    </div>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <span>Eliseo@gardner.biz</span>
-                    <div>
-                      laudantium enim quasi est quidem magnam voluptate ipsam
-                      eos\ntempora quo necessitatibus\ndolor quam autem
-                      quasi\nreiciendis et nam sapiente accusantium
-                    </div>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <span>Eliseo@gardner.biz</span>
-                    <div>
-                      laudantium enim quasi est quidem magnam voluptate ipsam
-                      eos\ntempora quo necessitatibus\ndolor quam autem
-                      quasi\nreiciendis et nam sapiente accusantium
-                    </div>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <span>Eliseo@gardner.biz</span>
-                    <div>
-                      laudantium enim quasi est quidem magnam voluptate ipsam
-                      eos\ntempora quo necessitatibus\ndolor quam autem
-                      quasi\nreiciendis et nam sapiente accusantium
-                    </div>
-                  </ListGroup.Item>
-                </ListGroup>
+                {isLoadingPostComments ? (
+                  <ListGroup>
+                    {comments.map((comment) => (
+                      <ListGroup.Item key={comment.id}>
+                        <span className="fw-bold">Email: {comment.email}</span>
+                        <div style={{fontSize: '12px'}}>
+                          {comment.body}
+                        </div>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                ) : (
+                  <ListGroup>
+                    <ListGroup.Item>
+                      <div>Идёт загрузка</div>
+                    </ListGroup.Item>
+                  </ListGroup>
+                )}
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
