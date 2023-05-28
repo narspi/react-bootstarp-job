@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from "react-redux";
 import {
   isLoadingSelector,
@@ -15,7 +16,7 @@ import { useEffect } from "react";
 
 const UserPage = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const isLoading = useSelector(isLoadingSelector);
   const isLoadingPosts = useSelector(isLoadingPostsSelector);
   const userInfo = useSelector(getUserInfoSelector);
@@ -23,12 +24,14 @@ const UserPage = () => {
 
   const dispatch = useDispatch();
 
+  const showUser = isLoading && userInfo.id === Number(id);
+
   useEffect(() => {
-    dispatch(requestSetUser(id));
+    if (!showUser) dispatch(requestSetUser(id));
   }, []);
 
   useEffect(()=>{
-    if (isLoading) dispatch(requestSetUserPosts(id));
+    if ((isLoading && !isLoadingPosts) || (isLoading && userInfo.id !== Number(id))) dispatch(requestSetUserPosts(id));
   },[isLoading])
 
   return (
@@ -36,7 +39,7 @@ const UserPage = () => {
       <Container>
         <Row>
           <Col className="py-4">
-            {isLoading ? (
+            {showUser ? (
               <>
                 <div>
                   <h1>
@@ -71,6 +74,7 @@ const UserPage = () => {
             ) : (
               <div>загрузка .....</div>
             )}
+             <Button variant="link" onClick={()=>navigate(-1)}>Кнопка назад</Button>
           </Col>
         </Row>
       </Container>

@@ -36,7 +36,7 @@ const Header = () => {
               <div className="d-flex">
                 <img
                   className="img-fluid w-50"
-                  src="./alexander.jpg"
+                  src="/alexander.jpg"
                   alt="alexander"
                 />
                 <div className="ms-3">

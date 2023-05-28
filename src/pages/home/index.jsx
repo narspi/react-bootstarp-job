@@ -36,20 +36,6 @@ const Home = () => {
     console.log(event.target.value);
   };
 
-  // useEffect(() => {
-  //   fetch("http://jsonplaceholder.typicode.com/posts", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       title: "en",
-  //     }),
-  //     headers: {
-  //       "Content-type": "application/json; charset=UTF-8",
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((json) => console.log(json));
-  // }, []);
-
   return (
     <main>
       <Container className="mt-4">
