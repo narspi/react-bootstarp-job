@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import debounce from "lodash.debounce";
 
 import MainPosts from './../../components/posts/MainPosts';
+import SearchPosts from "../../components/searchPosts";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -11,22 +11,16 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 
 const Home = () => {
-  const dispatch = useDispatch();
-
-  const [isSearch, setIsSearch] = useState(false);
-
-
+  const [searchState, setSearchState] = useState({isSearch: false, value: ""});
+  
   const handlerSearchChange = (event) => {
     const value = event.target.value;
     if (value.length > 0) {
-      setIsSearch(true);
-      //dispatch(requestSetSearchPosts(value));
+      setSearchState(prev=>({isSearch: true,value: event.target.value}));
     } else {
-      setIsSearch(false);
+      setSearchState(prev=>({isSearch: false,value: ''}));
     }
   };
-
-  console.log(isSearch)
 
   return (
     <main className="flex-grow-1">
@@ -46,7 +40,7 @@ const Home = () => {
             </InputGroup>
           </Col>
         </Row>
-        {!isSearch && <MainPosts />}
+        {!searchState.isSearch ? <MainPosts /> : <SearchPosts title={searchState.value}/>}
       </Container>
     </main>
   );
