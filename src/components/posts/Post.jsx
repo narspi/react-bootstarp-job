@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import { LinkContainer } from "react-router-bootstrap";
@@ -13,11 +12,9 @@ import {
 
 const Post = ({ id, title, body, userId }) => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
   const isLoadingPostComments = useSelector(isLoadingPostCommentsSelector(id));
 
   const handleAccordionClick = () => {
-    setOpen(!open);
     if (!isLoadingPostComments) dispatch(requestSetComments(id));
   };
 

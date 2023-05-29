@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import { LinkContainer } from "react-router-bootstrap";
@@ -7,21 +6,21 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { useDispatch, useSelector } from "react-redux";
 import {
   isLoadingPostCommentsSelector,
-  requestSetComments,
   getPostCommentsSelector,
-} from "../../redux/slices/postsSlice";
+  requestSetSearchComments
+} from "../../redux/slices/searchSlice";
 
 const SearchPost = ({ id, title, body, userId }) => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  //const isLoadingPostComments = useSelector(isLoadingPostCommentsSelector(id));
+  const isLoadingPostComments = useSelector(isLoadingPostCommentsSelector(id));
 
-//   const handleAccordionClick = () => {
-//     setOpen(!open);
-//     if (!isLoadingPostComments) dispatch(requestSetComments(id));
-//   };
+  const handleAccordionClick = () => {
+    if (!isLoadingPostComments) dispatch(requestSetSearchComments(id));
+  };
 
-  //const comments = useSelector(getPostCommentsSelector(id));
+  const comments = useSelector(getPostCommentsSelector(id));
+
+  console.log(isLoadingPostComments)
 
   return (
     <Col lg={4} md={6}>
@@ -34,8 +33,7 @@ const SearchPost = ({ id, title, body, userId }) => {
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Text>{body}</Card.Text>
-            bla blaa
-          {/* <Accordion>
+          <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header onClick={handleAccordionClick}>
                 Коментарии
@@ -61,7 +59,7 @@ const SearchPost = ({ id, title, body, userId }) => {
                 )}
               </Accordion.Body>
             </Accordion.Item>
-          </Accordion> */}
+          </Accordion>
         </Card.Body>
         <Card.Footer>
           <LinkContainer to={`user/${userId}`}>

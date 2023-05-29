@@ -25,8 +25,6 @@ const SearchPosts = ({ title }) => {
     };
   }, [title]);
 
-  console.log(searchPosts);
-
   return (
     <>
       <Row>
