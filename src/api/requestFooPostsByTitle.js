@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const requestFooPosts = async ({title}) => {
-    const req = await axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`);
+export const requestFooSearchTitle = async (title) => {
+    const req = await axios.get(`https://jsonplaceholder.typicode.com/posts?title=${title}`);
     return await req.data;
 }

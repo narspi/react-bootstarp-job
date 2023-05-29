@@ -31,7 +31,7 @@ const Header = () => {
           >
             <RxHamburgerMenu className="lh-1" />
           </Button>
-          <Modal show={show} onHide={handleClose} animation={false}>
+          <Modal show={show} onHide={handleClose}>
             <Modal.Body>
               <div className="d-flex">
                 <img

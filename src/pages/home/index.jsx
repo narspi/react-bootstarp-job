@@ -1,43 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getPostsSelector,
-  getPageSelector,
-  isLoadingSelector,
-  requestSetPost,
-  requestSetPostByTitle,
-} from "../../redux/slices/postsSlice";
 import debounce from "lodash.debounce";
+
+import MainPosts from './../../components/posts/MainPosts';
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Post from "../../components/post/Post";
-import PostPreloader from "../../components/post/Preloader";
-import PaginationBlock from "../../components/pagination";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const selectItems = useSelector(getPostsSelector);
-  const page = useSelector(getPageSelector);
-  const isLoading = useSelector(isLoadingSelector);
 
-  useEffect(() => {
-    if (!isLoading) dispatch(requestSetPost({ page: page, limit: 12 }));
-  }, [page]);
+  const [isSearch, setIsSearch] = useState(false);
 
-  const foo = () => {
-    console.log("debounce");
-  };
 
   const handlerSearchChange = (event) => {
-    console.log(event.target.value);
+    const value = event.target.value;
+    if (value.length > 0) {
+      setIsSearch(true);
+      //dispatch(requestSetSearchPosts(value));
+    } else {
+      setIsSearch(false);
+    }
   };
 
+  console.log(isSearch)
+
   return (
-    <main>
+    <main className="flex-grow-1">
       <Container className="mt-4">
         <Row>
           <Col>
@@ -49,25 +41,12 @@ const Home = () => {
               <Form.Control
                 placeholder="Поиск по заголовку"
                 aria-label="Поиск по заголовку"
-                aria-describedby="basic-addon2"
+                type="search"
               />
             </InputGroup>
           </Col>
         </Row>
-        <Row className="g-4">
-          {isLoading ? (
-            selectItems.map(({ id, title, body, userId }) => (
-              <Post key={id} id={id} title={title} body={body} userId={userId} />
-            ))
-          ) : (
-            <PostPreloader length={12} />
-          )}
-        </Row>
-        <Row className="mt-4">
-          <Col>
-            <PaginationBlock />
-          </Col>
-        </Row>
+        {!isSearch && <MainPosts />}
       </Container>
     </main>
   );

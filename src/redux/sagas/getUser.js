@@ -26,7 +26,6 @@ export function* getUserInfoWorker(params) {
 
 export function* getUserPostsWorker(params) {
     yield call(delay, 500);
-    console.log('worker')
     try {
       const data = yield call(requestFooUserPosts, params.payload);
       yield put(setUserPosts(data));
